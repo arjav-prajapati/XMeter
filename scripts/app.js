@@ -3,7 +3,7 @@ const app = angular.module('expenseTrackerApp', ['ngRoute']).run(async function 
     $rootScope.showExpenseModal = false;
     $rootScope.showBudgetIncomeModal = false;
     $rootScope.token = localStorage.getItem('xmeterToken');
-    if(!$rootScope.token && localStorage.getItem('xmeterToken') === null){
+    if (!$rootScope.token && localStorage.getItem('xmeterToken') === null) {
         location.href = $rootScope.hostUrl + 'signin.html';
         location.refresh();
     }
@@ -43,7 +43,7 @@ const app = angular.module('expenseTrackerApp', ['ngRoute']).run(async function 
         const user = JSON.parse(localStorage.getItem('user'));
         $http({
             method: 'POST',
-            url: 'http://localhost:3000/api/get-expenses/3',
+            url: 'https://xmeter.onrender.com/api/get-expenses/3',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -65,13 +65,13 @@ const app = angular.module('expenseTrackerApp', ['ngRoute']).run(async function 
         return dateD;
     }
 
-    $rootScope.getMonthYear = function(id){
+    $rootScope.getMonthYear = function (id) {
         // id have month and year
-        if(id === undefined) return "month, year";
+        if (id === undefined) return "month, year";
         const month = id.month;
         const year = id.year;
-        const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-        return `${months[month-1]}, ${year}`;
+        const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        return `${months[month - 1]}, ${year}`;
     }
 
     // calculate time difference
@@ -122,15 +122,15 @@ const app = angular.module('expenseTrackerApp', ['ngRoute']).run(async function 
         return days;
     }
 
-    
-    
+
+
     // get monthly expenses
     $rootScope.monthlyExpenses = [];
     $rootScope.getMonthlyExpenses = function () {
         const user = JSON.parse(localStorage.getItem('user'));
         $http({
             method: 'POST',
-            url: 'http://localhost:3000/api/get-monthly-expenses/4',
+            url: 'https://xmeter.onrender.com/api/get-monthly-expenses/4',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -146,13 +146,13 @@ const app = angular.module('expenseTrackerApp', ['ngRoute']).run(async function 
     };
 
 
-    $rootScope.lastMonthIncome  = 0;
+    $rootScope.lastMonthIncome = 0;
     $rootScope.getMonthIncome = function (month) {
         month = month || 1;
         const user = JSON.parse(localStorage.getItem('user'));
         $http({
             method: 'POST',
-            url: `http://localhost:3000/api/get-monthly-income/${parseInt(month)}`,
+            url: `https://xmeter.onrender.com/api/get-monthly-income/${parseInt(month)}`,
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -172,11 +172,11 @@ const app = angular.module('expenseTrackerApp', ['ngRoute']).run(async function 
         //send logout request
         $http({
             method: 'POST',
-            url: 'http://localhost:3000/api/logout',
+            url: 'https://xmeter.onrender.com/api/logout',
             headers: {
                 'Content-Type': 'application/json'
             },
-            data: JSON.stringify({ token: $rootScope.token || localStorage.getItem('xmeterToken')})
+            data: JSON.stringify({ token: $rootScope.token || localStorage.getItem('xmeterToken') })
         }).then(function successCallback(response) {
             localStorage.removeItem('xmeterToken');
             localStorage.removeItem('user');
@@ -196,38 +196,38 @@ const app = angular.module('expenseTrackerApp', ['ngRoute']).run(async function 
 
 
 
-app.config(function($routeProvider) {
+app.config(function ($routeProvider) {
     $routeProvider
         .when('/', {
-            templateUrl: '../components/dashboardCmp.html', 
+            templateUrl: '../components/dashboardCmp.html',
         })
         .when('/today', {
-            templateUrl: '../components/today.html', 
-            controller : 'TodayController',
-            controllerUrl : '../controllers/TodayController.js'
+            templateUrl: '../components/today.html',
+            controller: 'TodayController',
+            controllerUrl: '../controllers/TodayController.js'
         })
-        .when('/payment-Remainder',{
+        .when('/payment-Remainder', {
             templateUrl: '../components/paymentRemainder.html',
-            controller : 'RemainderController',
-            controllerUrl : '../controllers/PaymentRemainderController.js'
+            controller: 'RemainderController',
+            controllerUrl: '../controllers/PaymentRemainderController.js'
         })
-        .when('/recieved-Remainder',{
+        .when('/recieved-Remainder', {
             templateUrl: '../components/recievedRemainder.html',
-            controller : 'receivedRemainderController',
-            controllerUrl : '../controllers/receivedRemainderController.js'
+            controller: 'receivedRemainderController',
+            controllerUrl: '../controllers/receivedRemainderController.js'
         })
-        .when('/sent-Remainder',{
+        .when('/sent-Remainder', {
             templateUrl: '../components/sentRemainder.html',
-            controller : 'sentRemainderController',
-            controllerUrl : '../controllers/sentRemainderController.js'
+            controller: 'sentRemainderController',
+            controllerUrl: '../controllers/sentRemainderController.js'
         })
-        .when('/payment-split',{
+        .when('/payment-split', {
             templateUrl: '../components/paymentSplit.html'
         })
-        .when('/my-profile',{
+        .when('/my-profile', {
             templateUrl: '../components/myProfile.html',
-            controller : 'ProfileController',
-            controllerUrl : '../controllers/ProfileController.js'
+            controller: 'ProfileController',
+            controllerUrl: '../controllers/ProfileController.js'
         })
         .otherwise({
             redirectTo: '/' // Redirect to dashboard if no matching route found

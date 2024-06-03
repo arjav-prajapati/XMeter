@@ -12,7 +12,7 @@ function signinController($scope, $http) {
             // Perform HTTP request to authenticate user
             $http({
                 method: 'POST',
-                url: 'http://localhost:3000/api/signin',
+                url: 'https://xmeter.onrender.com/api/signin',
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -28,7 +28,7 @@ function signinController($scope, $http) {
                 }
             }).catch(function (error) {
                 console.error('Error occurred:', error);
-                alert('Signin failed: '+ error.data.message || 'Server error occurred');
+                alert('Signin failed: ' + error.data.message || 'Server error occurred');
             });
         } else {
             // Form is invalid, handle validation errors

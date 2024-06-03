@@ -1,4 +1,4 @@
-angular.module('expenseTrackerApp').controller('receivedRemainderController', function ($scope,$http,$rootScope) {
+angular.module('expenseTrackerApp').controller('receivedRemainderController', function ($scope, $http, $rootScope) {
 
 
     $scope.receivedRemainders = [];
@@ -7,7 +7,7 @@ angular.module('expenseTrackerApp').controller('receivedRemainderController', fu
     $scope.getReceivedRemainders = function () {
         $http({
             method: 'POST',
-            url: 'http://localhost:3000/api/get-received-remainders/',
+            url: 'https://xmeter.onrender.com/api/get-received-remainders/',
             headers: {
                 'Content-Type': 'application/json',
             },

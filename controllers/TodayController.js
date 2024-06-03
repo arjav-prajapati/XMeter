@@ -1,10 +1,10 @@
-angular.module('expenseTrackerApp').controller('TodayController', function($scope,$location,$http,$rootScope) {
+angular.module('expenseTrackerApp').controller('TodayController', function ($scope, $location, $http, $rootScope) {
 
     $scope.isIncomeLoading = true;
     $scope.isExpenseLoading = true;
     //return date in date month(in words) year format (eg. 12 January, 2021)
     $scope.currentDate = new Date();
-    $scope.getDate = function(){
+    $scope.getDate = function () {
         const dateD = new Date($scope.currentDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
         return dateD;
     }
@@ -15,11 +15,11 @@ angular.module('expenseTrackerApp').controller('TodayController', function($scop
     $scope.dateIncome = [];
 
     //get all expenses for the date
-    $scope.getDateExpenses = function(){
+    $scope.getDateExpenses = function () {
         $scope.isExpenseLoading = true;
         $http({
             method: 'POST',
-            url: 'http://localhost:3000/api/get-date-expense',
+            url: 'https://xmeter.onrender.com/api/get-date-expense',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -38,11 +38,11 @@ angular.module('expenseTrackerApp').controller('TodayController', function($scop
 
 
     //get all incomes for the date
-    $scope.getDateIncome = function(){
+    $scope.getDateIncome = function () {
         $scope.isIncomeLoading = true;
         $http({
             method: 'POST',
-            url: 'http://localhost:3000/api/get-date-income',
+            url: 'https://xmeter.onrender.com/api/get-date-income',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -60,9 +60,9 @@ angular.module('expenseTrackerApp').controller('TodayController', function($scop
     }
 
 
-    $scope.getNextDate = function(){
+    $scope.getNextDate = function () {
         $scope.currentDate.setDate($scope.currentDate.getDate() + 1);
-        if($scope.currentDate > new Date()){
+        if ($scope.currentDate > new Date()) {
             $scope.currentDate.setDate($scope.currentDate.getDate() - 1);
             return;
         }
@@ -71,9 +71,9 @@ angular.module('expenseTrackerApp').controller('TodayController', function($scop
         $scope.getDateIncome();
     }
 
-    $scope.getPreviousDate = function(){
+    $scope.getPreviousDate = function () {
         $scope.currentDate.setDate($scope.currentDate.getDate() - 1);
-        if($scope.currentDate < new Date('2021-01-01')){
+        if ($scope.currentDate < new Date('2021-01-01')) {
             $scope.currentDate.setDate($scope.currentDate.getDate() + 1);
             return;
         }

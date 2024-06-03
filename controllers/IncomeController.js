@@ -1,4 +1,4 @@
-angular.module('expenseTrackerApp').controller('IncomeController', function($scope,$rootScope,$http) {
+angular.module('expenseTrackerApp').controller('IncomeController', function ($scope, $rootScope, $http) {
     // Income controller logic
     $scope.formData = {
         source: '',
@@ -7,22 +7,22 @@ angular.module('expenseTrackerApp').controller('IncomeController', function($sco
     };
 
     // Budget & Income controller logic
-    $scope.submitIncome = function($event) {
+    $scope.submitIncome = function ($event) {
         $event.preventDefault();
         // Implement form submission logic here
 
         // if the form is not valid, return
-        if(!$scope.formData.source || !$scope.formData.amount || !$scope.formData.date){
+        if (!$scope.formData.source || !$scope.formData.amount || !$scope.formData.date) {
             alert('Please fill all the required fields');
             return;
         }
 
         // do api call to add income
-        const user =  JSON.parse(localStorage.getItem('user'));
+        const user = JSON.parse(localStorage.getItem('user'));
 
         $http({
             method: 'POST',
-            url: 'http://localhost:3000/api/add-income',
+            url: 'https://xmeter.onrender.com/api/add-income',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -45,7 +45,7 @@ angular.module('expenseTrackerApp').controller('IncomeController', function($sco
         }).catch(function errorCallback(response) {
             console.error(response);
         });
-        
+
         // Close the income modal after submission
         $scope.closeIncomeModal();
     };

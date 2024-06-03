@@ -1,5 +1,5 @@
 
-angular.module('expenseTrackerApp').controller('RemainderController', function ($scope,$http,$rootScope) {
+angular.module('expenseTrackerApp').controller('RemainderController', function ($scope, $http, $rootScope) {
     console.log('Remainder controller loaded!');
     $scope.newRemainder = {
         subject: '',
@@ -13,7 +13,7 @@ angular.module('expenseTrackerApp').controller('RemainderController', function (
     $scope.receivedRemainders = [];
 
     // Function to add a new Remainder
-    $scope.newRemainder.addRemainder = function(event) {
+    $scope.newRemainder.addRemainder = function (event) {
         event.preventDefault();
         $scope.isAddingRemainder = true;
         console.log('Adding new Remainder:', $scope.newRemainder);
@@ -22,7 +22,7 @@ angular.module('expenseTrackerApp').controller('RemainderController', function (
             // Form is valid, perform HTTP request to add Remainder
             $http({
                 method: 'POST',
-                url: 'http://localhost:3000/api/add-remainder',
+                url: 'https://xmeter.onrender.com/api/add-remainder',
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -63,7 +63,7 @@ angular.module('expenseTrackerApp').controller('RemainderController', function (
     $scope.getSentRemainders = function () {
         $http({
             method: 'POST',
-            url: 'http://localhost:3000/api/get-sent-remainders/2',
+            url: 'https://xmeter.onrender.com/api/get-sent-remainders/2',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -82,7 +82,7 @@ angular.module('expenseTrackerApp').controller('RemainderController', function (
     $scope.getReceivedRemainders = function () {
         $http({
             method: 'POST',
-            url: 'http://localhost:3000/api/get-received-remainders/2',
+            url: 'https://xmeter.onrender.com/api/get-received-remainders/2',
             headers: {
                 'Content-Type': 'application/json',
             },
