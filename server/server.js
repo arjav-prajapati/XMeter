@@ -63,7 +63,10 @@ const server = http.createServer(async (req, res) => {
         }
       }
 
-      if (url === "/api/signup") {
+      if (url === "/api/get-website") {
+        res.end("Hey, this is website!");
+      }
+      else if (url === "/api/signup") {
         // Handle signup API
         signUp(req, res);
       } else if (url === "/api/signin") {
