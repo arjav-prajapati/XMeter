@@ -1,5 +1,5 @@
 const app = angular.module('expenseTrackerApp', ['ngRoute']).run(async function ($rootScope, $http) {
-    $rootScope.hostUrl = 'http://127.0.0.1:5500/';
+    $rootScope.hostUrl = 'xmeter.netlify.app';
     $rootScope.showExpenseModal = false;
     $rootScope.showBudgetIncomeModal = false;
     $rootScope.token = localStorage.getItem('xmeterToken');

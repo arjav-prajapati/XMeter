@@ -23,6 +23,15 @@ const signUp = async (req, res) => {
 
         // Insert the new user into the database
         const db = await client.db("xmeter");
+
+        const user = await db.collection("users").find({ email });
+        console.log(user);
+        if (user) {
+            res.statusCode = 409;
+            res.setHeader('Content-Type', 'application/json');
+            res.end("User already exists!");
+            return;
+        }
         const result = await db.collection("users").insertOne(newUser);
 
         if (!result.acknowledged) {
